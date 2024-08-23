@@ -999,6 +999,7 @@ const _renderInteractiveScene = ({
 /** throttled to animation framerate */
 export const renderInteractiveSceneThrottled = throttleRAF(
   (config: InteractiveSceneRenderConfig) => {
+    console.log("opa?");
     const ret = _renderInteractiveScene(config);
     config.callback?.(ret);
   },

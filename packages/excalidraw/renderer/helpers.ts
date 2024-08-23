@@ -45,6 +45,7 @@ export const bootstrapCanvas = ({
   viewBackgroundColor?: StaticCanvasAppState["viewBackgroundColor"];
 }): CanvasRenderingContext2D => {
   const context = canvas.getContext("2d")!;
+  console.log("bootstrap");
 
   context.setTransform(1, 0, 0, 1, 0, 0);
   context.scale(scale, scale);
@@ -64,9 +65,39 @@ export const bootstrapCanvas = ({
       context.clearRect(0, 0, normalizedWidth, normalizedHeight);
     }
     context.save();
-    context.fillStyle = viewBackgroundColor;
-    context.fillRect(0, 0, normalizedWidth, normalizedHeight);
+    // context.fillStyle = viewBackgroundColor;
+    // console.log(normalizedWidth);
+    // console.log(normalizedHeight);
+    // const image = new Image();
+    // image.src = "my_background_pattern.png";
+    // image.onload = () => {
+    //   context.restore();
+    //   console.log("img loaded");
+    //   const pattern = context.createPattern(image, "repeat");
+    //   context.fillStyle = pattern as CanvasPattern;
+    //   context.fillRect(0, 0, normalizedWidth, normalizedHeight);
+    // };
+    const size = 30;
+    for (let i = 0; i < 100; i++) {
+      for (let j = 0; j < 100; j++) {
+        if ((j + i) % 2 === 0) {
+          // context.fillStyle = "#f5dfdc";
+          context.fillStyle = "#fef7f6";
+        } else {
+          // context.fillStyle = "#94a5a1";
+          context.fillStyle = "#dae4e1";
+        }
+
+        // context.globalAlpha = 0.2;
+        context.fillRect(j * size, i * size, size, size);
+        // context.globalAlpha = 1.0;
+      }
+    }
+
     context.restore();
+
+    // console.log("viewBackgroundColor", viewBackgroundColor);
+    // context.fill();
   } else {
     context.clearRect(0, 0, normalizedWidth, normalizedHeight);
   }
